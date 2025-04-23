@@ -1,5 +1,4 @@
 import { useState } from "react"
-import Image from "next/image"
 
 export default function Home() {
   const [question, setQuestion] = useState("")
@@ -22,29 +21,23 @@ export default function Home() {
 
       const data = await res.json()
       setAnswers(data)
-    } catch (error) {
-      alert("답변을 불러오는 중 문제가 발생했습니다.")
+    } catch (err) {
+      alert("에러 발생")
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div style={{ maxWidth: "720px", margin: "auto", padding: "20px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <Image src="/logo.png" alt="logo" width={40} height={40} />
-        <h1 style={{ fontSize: "28px", fontWeight: "bold" }}>AllGPT</h1>
-      </div>
-
-      <p style={{ color: "#555", marginTop: "10px" }}>
-        여러 인공지능의 답변을 한 번에 비교하세요.
-      </p>
+    <main style={{ maxWidth: "700px", margin: "auto", padding: "40px" }}>
+      <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>AllGPT</h1>
+      <p style={{ color: "#666" }}>여러 인공지능의 답변을 한 번에 비교하세요.</p>
 
       <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
         <input
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="무엇이든 물어보세요"
+          placeholder="질문을 입력하세요"
           style={{
             flex: 1,
             padding: "10px",
@@ -63,7 +56,7 @@ export default function Home() {
             color: "#fff",
             border: "none",
             borderRadius: "4px",
-            cursor: loading ? "not-allowed" : "pointer",
+            cursor: "pointer",
           }}
         >
           {loading ? "질문 중..." : "질문하기"}
@@ -76,19 +69,18 @@ export default function Home() {
             <div
               key={model}
               style={{
-                marginBottom: "16px",
-                padding: "16px",
-                border: "1px solid #eee",
+                background: "#f2f2f2",
+                padding: "15px",
                 borderRadius: "8px",
-                background: "#f9f9f9",
+                marginBottom: "12px",
               }}
             >
-              <h3 style={{ marginBottom: "8px" }}>🧠 {model}</h3>
-              <p style={{ whiteSpace: "pre-wrap" }}>{response}</p>
+              <strong>{model}</strong>
+              <p style={{ marginTop: "8px", whiteSpace: "pre-wrap" }}>{response}</p>
             </div>
           ))}
         </div>
       )}
-    </div>
+    </main>
   )
 }
