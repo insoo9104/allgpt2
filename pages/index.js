@@ -1,5 +1,5 @@
 // pages/index.js
-'use client'; // ⬅ 이거 꼭 필요!
+'use client'; //
 
 import { useState } from 'react';
 
